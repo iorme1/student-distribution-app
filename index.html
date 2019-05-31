@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Organize Your Classrooms</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark navbar-expand-sm nav bg-dark">
+      <a href="#" class="navbar-brand navbar-text">Organize Your Classrooms</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ml-auto font-italic">
+          <li class="nav-item">
+            <button class="create-cr nav-link btn btn-success navbar-text m-2" data-toggle="modal" data-target="#modal-cr">Create Classrooms</button>
+          </li>
+          <li class="nav-item">
+            <button class="import-st nav-link btn btn-info navbar-text m-2" data-toggle="modal" data-target="#modal-fu">Import Students</button>
+          </li>
+          <li class="nav-item">
+            <button class="create-st nav-link btn btn-danger navbar-text m-2">Create Student</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Classroom Modal -->
+    <div class="modal fade" id="modal-cr" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Classrooms</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-body-classroom">
+             <form class="classroom-modal-input-fields">
+               <div class="form-group">
+                 <label for="num-classrooms" class="col-form-label text-danger">Number of classrooms</label>
+                 <input type="number" name="num-classrooms" placeholder="0" id="num-classrooms-input">
+               </div>
+               <div class="form-group">
+                 <label for="max-capacity" class="col-form-label text-danger">Max capacity per class</label>
+                 <input type="number" name="max-capacity" placeholder="0" id="max-capacity-input">
+               </div>
+               <div class="form-group">
+                 <label for="spread-factor" class="col-form-label text-danger">
+                   Attribute to Organize By<p class="text-info">(case sensitive based on your exact excel attribute name)</p>
+                 </label>
+                 <input type="text" name="spread-factor" class="form-control" placeholder="...Attribute to organize by" id="spread-factor-input">
+               </div>
+              <div class="form-group">
+                 <input type="submit" class="btn btn-lg btn-success form-control"/>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- import students modal -->
+
+    <div class="modal fade" id="modal-fu" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Upload your Excel file</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form>
+               <div class="form-group">
+                 <input type="file" name="f-upload" class="form-control" id="file-upload">
+               </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of upload file modal --->
+
+    <div class="container">
+        <div class="row mt-3">
+          <div class="col-12 text-center">
+            <button class="org-classes-btn btn btn-lg btn-warning">Organize Classes</button>
+          </div>
+        </div>
+        <div class="classrooms-container text-center"></div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/swappable.js"></script>
+    <script src="./scripts/xlsx.full.min.js"></script>
+    <script src="./scripts/parse-excel.js" type="module"></script>
+    <script src="./scripts/drag.js" type="module"></script>
+    <script src="./scripts/classroom-form.js" type="module"></script>
+    <script src="./scripts/classroom.js" type="module"></script>
+  </body>
+</html>

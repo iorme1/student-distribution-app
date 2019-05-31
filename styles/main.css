@@ -1,0 +1,97 @@
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+ min-height: 100%;
+ padding: 0;
+ margin: 0;
+ overflow-x: hidden;
+ word-wrap: break-word;
+}
+
+.navbar-text {
+  color: white;
+}
+
+.classroom {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #555;
+  width: 325px;
+}
+
+.classroom:hover {
+  cursor: pointer;
+}
+
+.classroom-title {
+  background-color: red;
+  color: whitesmoke;
+  padding: 3px;
+  font-size: 20px;
+}
+
+.score {
+  color: red;
+}
+
+.stat-score {
+  color: #F012BE;
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.student-row {
+  background-color: #FFDC00;
+  max-height: 30px;
+}
+
+.student {
+  background-color: #FFDC00;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  max-height: 30px;
+  text-align: center;
+}
+
+.classroom-stats {
+  padding-bottom: 10px;
+}
+
+.stats {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  max-height: 25px;
+  text-align: center;
+}
+
+.student:hover {
+  background-color: #17a2b8;
+}
+
+.toggle-classroom {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #0074D9;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.empty-seat {
+  color: green;
+}
