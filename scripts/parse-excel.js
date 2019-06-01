@@ -1,16 +1,30 @@
 import { ClassroomsData } from './classroom.js';
 const StudentList = {};
 
+  // CHANGE alerts to use SweetAlert library
 function handleFile() {
   if (!userCreatedClassrooms()) {
-    // CHANGE THIS TO USE SWEET ALERT 
-    alert(
-      "Please configure classrooms first by clicking Create Classrooms button"
-    )
-    location.reload();
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'You have not created your classrooms yet!',
+      footer: 'click on the "create classroom button"'
+    });
+    return;
   }
 
   let files = this.files, f = files[0];
+
+  if (!validFileUpload(f.name)) {
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: 'Invalid File Format',
+      footer: 'Please upload an excel file.'
+    });
+    return;
+  }
+
   let reader = new FileReader();
   reader.onload = function(e) {
     let data = new Uint8Array(e.target.result);
@@ -25,6 +39,18 @@ function handleFile() {
   reader.readAsArrayBuffer(f);
 }
 
+function validFileUpload(fileName) {
+  let allowedExtensions = ["xlsx","xls","xlsxm", "xltx","xltm"];
+  let fileExtension = fileName.split('.').pop();
+
+  for(let i = 0; i <= allowedExtensions.length; i++) {
+    if(allowedExtensions[i] == fileExtension) {
+	     return true;
+    }
+  }
+  return false;
+}
+
 function userCreatedClassrooms() {
   let classrooms = ClassroomsData.getAllClassrooms();
 
@@ -36,7 +62,6 @@ function userCreatedClassrooms() {
 }
 
 export { StudentList };
-
 
 document.querySelector("#file-upload")
   .addEventListener("change", handleFile, false);
