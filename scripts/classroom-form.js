@@ -1,3 +1,5 @@
+import { ClassroomsData } from './classroom-manager.js'
+
 function removeClassForm() {
   let parent = this.parentNode;
   let grandParent = parent.parentNode;
@@ -5,7 +7,7 @@ function removeClassForm() {
   grandParent.removeChild(parent);
 }
 
-function removeAllClassForms(element) {
+function removeAllClassNameInputs(element) {
   let parent = element.parentNode;
   let grandParent = parent.parentNode;
 
@@ -17,7 +19,7 @@ function removeAllClassForms(element) {
 }
 
 function addClassNameInputs() {
-  removeAllClassForms(this);
+  removeAllClassNameInputs(this);
 
   let numberOfClasses = this.value;
   let form = document.querySelector('.classroom-modal-input-fields');
@@ -51,6 +53,24 @@ function addClassNameInputs() {
     form.appendChild(div);
   }
 }
+
+function classRoomHandler(e) {
+  e.preventDefault()
+  $("#modal-cr").modal('toggle');
+
+  let form = this;
+  let targetAttribute = form.elements["spread-factor"].value.toLowerCase();
+  let classroomInputs = Array.from(form.elements["classroom-name"]);
+  let maxCapacity = form.elements["max-capacity"].value
+
+  ClassroomsData.setMaxCapacity(maxCapacity);
+  ClassroomsData.setTargetAttribute(targetAttribute);
+
+  classroomInputs.forEach(room => ClassroomsData.addClassroom(room.value));
+}
+
+document.querySelector(".classroom-modal-input-fields")
+  .onsubmit = classRoomHandler;
 
 document.querySelector("#num-classrooms-input").onkeyup = addClassNameInputs;
 document.querySelector("#num-classrooms-input").onchange = addClassNameInputs;

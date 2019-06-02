@@ -1,10 +1,3 @@
-Currently have hacky "attributes" situation. We have state.attributeTotals
-and just general "attributes" array. Used interchangeably right now with
-hacky conditionals... fix this up.
-
-also should refactor the setting up of attributes to lower case everything
-right from the start, so we don't have to check later in the code.
-
 Figure out how to setup an "order" of operations for a user to
 make for better user experience, make it very clear and only
 give option for creating classrooms FIRST, THEN show import
@@ -15,3 +8,12 @@ to let user know that the attribute chosen to organize their
 students by was not input correctly, etc.  going to need to find
 all places where user error from mistyping anything can be saved
 and displayed properly to the user.
+
+Need to have form checks that validate unique classroom names, all fields
+filled out, etc.
+
+add feature to click on certain classroom stats like: males, females,
+lowReader, special Ed, etc and highlight all those students in that
+classroom.
+
+add feature to mouseover student to get full student data 

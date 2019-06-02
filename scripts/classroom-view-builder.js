@@ -5,55 +5,58 @@ function CreateViewBuilder() {
   function classroomHTMLBuilder() {
     let classes = ClassroomsData.getAllClassrooms();
     let targetAttribute = ClassroomsData.getTargetAttribute();
+    let classroomsContainer = document.querySelector('.classrooms-container');
 
     for (let room in classes) {
-      let classroomsContainer = document.querySelector('.classrooms-container');
-
-      /* creates head of the classroom table */
-      let roomContainer = document.createElement('div');
-      roomContainer.classList.add("classroom");
-      roomContainer.dataset.classroomtable = room;
-
-      let titleContainer = document.createElement('div');
-      titleContainer.classList.add("classroom-title");
-      titleContainer.classList.add("text-center");
-      titleContainer.textContent = room;
-
-      let toggleMinimizeBtn = document.createElement('button');
-      toggleMinimizeBtn.classList.add("toggle-classroom");
-      toggleMinimizeBtn.onclick = toggleClassroom;
-
-      titleContainer.appendChild(toggleMinimizeBtn);
-
-
-      roomContainer.appendChild(titleContainer);
+      let roomContainer = createRoomContainer(room)
       classroomsContainer.appendChild(roomContainer);
-      /* end of head of classroom table */
 
-      let studentBatch = [...classes[room].students];
-      /* array of html rows */
-      let studentHTMLrows = createStudentHTMLrows(studentBatch, room)
+      let students = classes[room].students;
 
+      let studentHTMLrows = createStudentHTMLrows(students, room)
       studentHTMLrows.forEach(row => roomContainer.appendChild(row))
 
-      let roomStatsContainer = document.createElement('div');
-      roomStatsContainer.classList.add("classroom-stats");
+      let roomStatsContainer = createRoomStatsContainer()
       roomContainer.appendChild(roomStatsContainer);
 
       let statsHTMLrows = createStatsHTMLrows(classes[room]);
-
       statsHTMLrows.forEach(row => roomStatsContainer.appendChild(row));
-      /* drags entire classroom only by title element as a handle
-       because we need rows nested in this element to be
-       draggable as well */
-      dragElement(titleContainer);
     }
     ClassroomsData.setStudentBlock()
   }
 
+  function createRoomStatsContainer() {
+    let roomStatsContainer = document.createElement('div');
+    roomStatsContainer.classList.add("classroom-stats");
 
-  function createStudentHTMLrows(studentBatch, roomName) {
-    let students = [...studentBatch];
+    return roomStatsContainer;
+  }
+
+  function createRoomContainer(room) {
+    let roomContainer = document.createElement('div');
+    roomContainer.classList.add("classroom");
+    roomContainer.dataset.classroomtable = room;
+
+    let titleContainer = document.createElement('div');
+    titleContainer.classList.add("classroom-title");
+    titleContainer.classList.add("text-center");
+    titleContainer.textContent = room;
+
+    let toggleMinimizeBtn = document.createElement('button');
+    toggleMinimizeBtn.classList.add("toggle-classroom");
+    toggleMinimizeBtn.onclick = toggleClassroom;
+
+    titleContainer.appendChild(toggleMinimizeBtn);
+    roomContainer.appendChild(titleContainer);
+
+    dragElement(titleContainer); // make draggable handle for classroom
+
+    return roomContainer;
+  }
+
+
+  function createStudentHTMLrows(studentList, roomName) {
+    let students = [...studentList];
     let emptySlots = ClassroomsData.getMaxCapacity() - students.length;
     let rows = [];
     let targetAttribute = ClassroomsData.getTargetAttribute();

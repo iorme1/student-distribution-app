@@ -7,7 +7,8 @@ const ClassroomsData = ClassroomsManager();
 function ClassroomsManager() {
    const state = {
      classrooms: {},
-     attributes: [],
+     studentAttributes: [],
+     classroomAttributes: ["males", "females"],
      targetAttribute: "",
      lastOverElement: null,
      maxCapacity: 0
@@ -29,49 +30,54 @@ function ClassroomsManager() {
 
   function addStudent(room, student) {
     room.students.push(student)
-    incrementRoomAttributes(room, student)
+    incrementClassroomAttributes(room, student)
   }
 
   function removeStudent(room, student) {
     room.students = room.students.filter(currentStudent => {
       return student != currentStudent;
     });
-    decrementRoomAttributes(room, student);
+    decrementClassroomAttributes(room, student);
   }
 
-  function decrementRoomAttributes(room, student) {
+  function decrementClassroomAttributes(room, student) {
     for (let attr in student) {
-      if (
-        room.attributeTotals[attr] == "undefined" ||
-        attr.toLowerCase() == "name"
-      ) continue;
-
-      if (attr.toLowerCase() == 'sex') {
+      /* special case for "sex" attribute because it requires an adjustment
+      to males/females property in classroom attributeTotals*/
+      if (attr == 'sex') {
         student[attr].toLowerCase() == "m" ?
         room.attributeTotals.males-- :
         room.attributeTotals.females--;
+        /* if the student attribute isn't relevant to classroom attributeTotals
+         then we skip the attribute  (i.e name, etc) */
+      } else if (room.attributeTotals[attr] == undefined || attr == "name") {
+        continue;
       } else {
+        /* all other attributes will be decreased based on this student's
+         attribute value */
         room.attributeTotals[attr] -= student[attr]
       }
     }
     let targetAttribute = state.targetAttribute;
-
     room.score -= student[targetAttribute];
   }
 
 
-  function incrementRoomAttributes(room, student) {
+  function incrementClassroomAttributes(room, student) {
     for (let attr in student) {
-      if (
-        room.attributeTotals[attr] == "undefined" ||
-        attr.toLowerCase() == "name"
-      ) continue;
-
-      if (attr.toLowerCase() == 'sex') {
+      /* special case for "sex" attribute because it requires an adjustment
+      to males/females property in classroom attributeTotals*/
+      if (attr == 'sex') {
         student[attr].toLowerCase() == "m" ?
         room.attributeTotals.males++ :
         room.attributeTotals.females++;
+        /* if the student attribute isn't relevant to classroom attributeTotals
+         then we skip the attribute  (i.e name, etc) */
+      } else if (room.attributeTotals[attr] == undefined || attr == "name") {
+        continue;
       } else {
+        /* all other attributes will be increased based on this student's
+         attribute value */
         room.attributeTotals[attr] += student[attr]
       }
     }
@@ -87,15 +93,18 @@ function ClassroomsManager() {
     return state.classrooms[classroomName];
   }
 
-  function addClassroom(classroomName) {
-    state.classrooms[classroomName] = {
-      score: 0,
-      students: [],
-      attributeTotals: {
-        males: 0,
-        females: 0
-      }
-    };
+  function addClassroom(roomName) {
+    let classrooms = state.classrooms;
+    let room = {};
+
+    room.score = 0;
+    room.students = [];
+    /* sets default male female count properties,
+      more dynamic properties will be added to this object later
+      based on user's excel columns */
+    room.attributeTotals = {males: 0, females: 0};
+
+    classrooms[roomName] = room;
   }
 
   function setTargetAttribute(attr) {
@@ -107,39 +116,62 @@ function ClassroomsManager() {
   }
 
   function getClassroomAttributes() {
-    for (let key in state.classrooms) {
-      return Object.keys(state.classrooms[key].attributeTotals)
-    }
+     return [...state.classroomAttributes]
+  }
+
+  function getStudentAttributes() {
+    return [...state.studentAttributes];
   }
 
   function setAllAttributes(students) {
     let classes = state.classrooms;
+    /* sets student attributes */
+    for (let key in students) {
+      state.studentAttributes.push(key);
+    }
 
-    for (let key in students) state.attributes.push(key);
+    setClassroomAttributes(classes)
+  }
 
-    // sets classroom stat properties for each classroom
+  function setClassroomAttributes(classes) {
+    let studentAttrs = getStudentAttributes();
     for (let room in classes) {
       let attributeTotals = classes[room].attributeTotals;
 
-      for (let key in students) {
-        let value = students[key]
-        let attr = key.toLowerCase();
-        if (attr.includes("name") || attr.includes("sex")) continue;
+      for (let attr in studentAttrs) {
+        let attribute = studentAttrs[attr];
+        if (attribute.includes("name") || attribute.includes("sex")) continue;
 
-        attributeTotals[key] = 0;
+        attributeTotals[attribute] = 0;
       }
+    }
+    /* creates an array of the classroom attribute names for state. used for
+    instances where we only need the classroom attribute names and not the totals
+    per classroom */
+    for (let attr in studentAttrs) {
+      let attribute = studentAttrs[attr];
+      if (attribute.includes("name") || attribute.includes("sex")) continue;
+      state.classroomAttributes.push(attribute)
     }
   }
 
-  /* unpacks nested obect into a simple array of student objects */
+  /* unpacks nested obect into a simple array of student objects with lower
+   cased attribute keys */
   function formatStudentList() {
-    let result = []
-
+    let students = []
+    // StudentList.data contains student objects
     for (let key in StudentList.data) {
-      result.push(StudentList.data[key])
+      let student = StudentList.data[key];
+      let studentWithLowerCaseKey = {};
+      /* lowercase all student attribute keys */
+      for (let attr in student) {
+        let newKey = attr.toLowerCase();
+        studentWithLowerCaseKey[newKey] = student[attr];
+      }
+      students.push(studentWithLowerCaseKey)
     }
 
-    return result;
+    return students;
   }
 
   function getLowestClassScore() {
@@ -167,11 +199,11 @@ function ClassroomsManager() {
   function organizeStudentsByTargetAttribute() {
     this.style.display = "none"; // removes organize button
 
-    let formattedStudentList = formatStudentList();
+    let students = formatStudentList();
 
-    setAllAttributes(formattedStudentList[0]);
+    setAllAttributes(students[0]);
 
-    let sortedStudents = formattedStudentList.sort((a,b) => {
+    let sortedStudents = students.sort((a,b) => {
        return b[state.targetAttribute] - a[state.targetAttribute];
     });
 
@@ -204,12 +236,9 @@ function ClassroomsManager() {
     return room.students.filter(student => {
       let foundStudent = false
       for (let attr in student) {
-        let key = attr.toLowerCase();
-        if (key.includes("name")) {
-          if (student[attr] == studentName) {
-            foundStudent = true;
-            break;
-          }
+        if (attr.includes("name") && student[attr] == studentName) {
+          foundStudent = true;
+          break;
         }
       }
       return foundStudent;
@@ -284,6 +313,7 @@ function ClassroomsManager() {
     return elmnt.dataset.identifier == "empty-slot";
   }
 
+  /* this should be in ViewBuilder class */
   function updateStatsView(room1Name, room2Name) {
     let room1Container = document
       .querySelector(`[data-classroomtable="${room1Name}"]`);
@@ -313,6 +343,7 @@ function ClassroomsManager() {
   return {
     addClassroom,
     getAllClassrooms,
+    getStudentAttributes,
     getClassroom,
     setTargetAttribute,
     getTargetAttribute,
@@ -324,25 +355,6 @@ function ClassroomsManager() {
     setMaxCapacity
   }
 }
-
-
-function classRoomHandler(e) {
-  e.preventDefault()
-  $("#modal-cr").modal('toggle');
-
-  let form = this;
-  let targetAttribute = form.elements["spread-factor"].value
-  let classroomInputs = Array.from(form.elements["classroom-name"]);
-  let maxCapacity = form.elements["max-capacity"].value
-
-  ClassroomsData.setMaxCapacity(maxCapacity);
-  ClassroomsData.setTargetAttribute(targetAttribute);
-
-  classroomInputs.forEach(room => ClassroomsData.addClassroom(room.value));
-}
-
-document.querySelector(".classroom-modal-input-fields")
-  .onsubmit = classRoomHandler;
 
 document.querySelector(".org-classes-btn")
   .onclick = ClassroomsData.organizeStudentsByTargetAttribute
