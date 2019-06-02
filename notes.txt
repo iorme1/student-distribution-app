@@ -1,0 +1,17 @@
+Currently have hacky "attributes" situation. We have state.attributeTotals
+and just general "attributes" array. Used interchangeably right now with
+hacky conditionals... fix this up.
+
+also should refactor the setting up of attributes to lower case everything
+right from the start, so we don't have to check later in the code.
+
+Figure out how to setup an "order" of operations for a user to
+make for better user experience, make it very clear and only
+give option for creating classrooms FIRST, THEN show import
+students button
+
+going to need to throw errors and use some kind of sweet alert
+to let user know that the attribute chosen to organize their
+students by was not input correctly, etc.  going to need to find
+all places where user error from mistyping anything can be saved
+and displayed properly to the user.

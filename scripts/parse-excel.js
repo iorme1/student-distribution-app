@@ -1,8 +1,9 @@
-import { ClassroomsData } from './classroom.js';
+import { ClassroomsData } from './classroom-manager.js';
 const StudentList = {};
 
-  // CHANGE alerts to use SweetAlert library
 function handleFile() {
+  let files = this.files, f = files[0];
+
   if (!userCreatedClassrooms()) {
     Swal.fire({
       type: 'error',
@@ -12,8 +13,6 @@ function handleFile() {
     });
     return;
   }
-
-  let files = this.files, f = files[0];
 
   if (!validFileUpload(f.name)) {
     Swal.fire({
@@ -43,7 +42,7 @@ function validFileUpload(fileName) {
   let allowedExtensions = ["xlsx","xls","xlsxm", "xltx","xltm"];
   let fileExtension = fileName.split('.').pop();
 
-  for(let i = 0; i <= allowedExtensions.length; i++) {
+  for (let i = 0; i < allowedExtensions.length; i++) {
     if(allowedExtensions[i] == fileExtension) {
 	     return true;
     }
