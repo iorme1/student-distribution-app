@@ -19,7 +19,7 @@ function CreateViewBuilder() {
       let roomStatsContainer = createRoomStatsContainer()
       roomContainer.appendChild(roomStatsContainer);
 
-      let statsHTMLrows = createStatsHTMLrows(classes[room]);
+      let statsHTMLrows = createStatsHTMLrows(classes[room], room);
       statsHTMLrows.forEach(row => roomStatsContainer.appendChild(row));
     }
     ClassroomsData.setStudentSwappable();
@@ -63,9 +63,9 @@ function CreateViewBuilder() {
     return row;
   }
 
-  function createAttrP(attr) {
+  function createP(text) {
     let attr_p = document.createElement('p');
-    attr_p.textContent = attr;
+    attr_p.textContent = text;
 
     return attr_p
   }
@@ -203,8 +203,8 @@ function CreateViewBuilder() {
   }
 
 
-  function createStatsHTMLrows(room) {
-      let attributes = ClassroomsData.getClassroomAttributes();
+  function createStatsHTMLrows(room, roomName) {
+      let attributes = Object.keys(ClassroomsData.getClassroomAttributes());
       let rows = [];
 
       while (true) {
@@ -215,7 +215,9 @@ function CreateViewBuilder() {
         let attr1 = attributes.pop();
         let col1 = createCol6();
 
-        let attr1_p = createAttrP(attr1);
+        let attr1_p = createP(attr1);
+        attr1_p.dataset.classroom = roomName;
+        attr1_p.onclick = highlightRelevantStudents;
         let span1 = createStatSpan(attr1, room);
 
         attr1_p.appendChild(span1)
@@ -230,7 +232,9 @@ function CreateViewBuilder() {
         let attr2 = attributes.pop();
         let col2 = createCol6();
 
-        let attr2_p = createAttrP(attr2);
+        let attr2_p = createP(attr2);
+        attr2_p.dataset.classroom = roomName;
+        attr2_p.onclick = highlightRelevantStudents;
         let span2 = createStatSpan(attr2, room);
 
         attr2_p.appendChild(span2)
@@ -264,6 +268,66 @@ function CreateViewBuilder() {
     }
   }
 
+  function highlightRelevantStudents() {
+    let attribute = this.firstElementChild.dataset.attribute;
+    let datasetRoomName = this.dataset.classroom;
+    let classroom = ClassroomsData.getClassroom(datasetRoomName);
+    let students = classroom.students;
+    let classroomContainer = document
+      .querySelector(`[data-classroomtable="${datasetRoomName}"]`);
+
+    let studentsHTML = classroomContainer.querySelectorAll('.student');
+    let relevantStudents = new Set();
+    let classroomAttributes = ClassroomsData.getClassroomAttributes();
+
+    studentsHTML.forEach(student => {
+      student.style.color = "black";
+      student.style.backgroundColor = '#FFDC00';
+      student.style.border = "1px solid black";
+    });
+
+    if (attribute == "males") {
+      students.forEach(student => {
+        if(student["sex"] == "m" || student["sex"] == "M") {
+          relevantStudents.add(student["name"])
+        }
+      });
+    } else if (attribute == "females") {
+      students.forEach(student => {
+        if (student["sex"]  == "f" || student["sex"] == "F") {
+          relevantStudents.add(student["name"]);
+        }
+      });
+    } else if (classroomAttributes[attribute] == "binary type") {
+      students.forEach(student => {
+        if (student[attribute] == "yes") {
+          relevantStudents.add(student["name"]);
+        }
+      });
+    } else {
+      return;
+    }
+
+    studentsHTML.forEach(student => {
+      let studentName = student.dataset.identifier;
+
+      if (relevantStudents.has(studentName)) {
+        student.style.color = "white";
+        student.style.backgroundColor = "black";
+        student.style.border = "1px solid red";
+      }
+    });
+  }
+
+  function removeHighlightsAfterSwap(elmnt1, elmnt2) {
+      elmnt1.style.color = "black";
+      elmnt1.style.backgroundColor = '#FFDC00';
+      elmnt1.style.border = "1px solid black";
+      elmnt2.style.color = "black";
+      elmnt2.style.backgroundColor = '#FFDC00';
+      elmnt2.style.border = "1px solid black";
+  }
+
   function displayStudentStats() {
     let studentElmnt = this;
     let studentName = studentElmnt.dataset.identifier;
@@ -278,12 +342,24 @@ function CreateViewBuilder() {
 
 
   function showHTMLstudentData(studentElmnt, studentObj) {
+    let studentData = document.querySelector('.student-data');
+    removePreviousData(studentData)
+
     for (let attr in studentObj) {
-      //
+      let text = `${attr}: ${studentObj[attr]}`
+      let p = createP(text)
+      studentData.appendChild(p);
+    }
+  }
+
+  function removePreviousData(studentData) {
+    while (studentData.firstChild) {
+      studentData.removeChild(studentData.firstChild);
     }
   }
 
   return {
+    removeHighlightsAfterSwap,
     classroomHTMLBuilder
   }
 }

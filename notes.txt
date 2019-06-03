@@ -1,19 +1,16 @@
 FINISH breaking down functions in view builder file, still have some
-super long element creation functions (look into jQuery after this
-for shorter syntax/cleaner code for element creation)
+super long element creation functions
 
 you have an updateStatsView method in classrooms manager that should
 be moved over to view builder appropriately.
 
 decide if u want a standard excel document attribute for "name"...
 this leads into other questions about how specific the format needs
-to be without being TOO strict. 
+to be without being TOO strict.
 
 add feature to click on certain classroom stats like: males, females,
 lowReader, special Ed, etc and highlight all those students in that
 classroom.
-
-add feature to mouseover student to get full student data
 
 Need to have form checks that validate unique classroom names, all fields
 filled out, etc.
