@@ -18,6 +18,44 @@ function removeAllClassNameInputs(element) {
   }
 }
 
+function createFormLabel() {
+  let label = document.createElement('label');
+  label.setAttribute("for", "classroom-name");
+  label.classList.add("col-form-label");
+  label.classList.add("text-danger");
+  label.textContent = "Classroom Name";
+
+  return label;
+}
+
+function createFormDiv() {
+  let div = document.createElement('div')
+  div.classList.add("form-group");
+  div.classList.add("removable");
+
+  return div;
+}
+
+function createFormInput() {
+  let input = document.createElement('input');
+  input.setAttribute("type", "text");
+  input.setAttribute("name", "classroom-name");
+  input.classList.add("form-control");
+
+  return input;
+}
+
+function createRemoveBtn() {
+  let removeBtn = document.createElement('button');
+  removeBtn.classList.add("btn");
+  removeBtn.classList.add("btn-xs");
+  removeBtn.classList.add("btn-danger");
+  removeBtn.textContent = "remove class"
+  removeBtn.onclick = removeClassForm;
+
+  return removeBtn;
+}
+
 function addClassNameInputs() {
   removeAllClassNameInputs(this);
 
@@ -25,27 +63,10 @@ function addClassNameInputs() {
   let form = document.querySelector('.classroom-modal-input-fields');
 
   for (let i = 0; i < numberOfClasses; i++) {
-    let div = document.createElement('div')
-    div.classList.add("form-group");
-    div.classList.add("removable");
-
-    let label = document.createElement('label');
-    label.setAttribute("for", "classroom-name");
-    label.classList.add("col-form-label");
-    label.classList.add("text-danger");
-    label.textContent = "Classroom Name";
-
-    let input = document.createElement('input');
-    input.setAttribute("type", "text");
-    input.setAttribute("name", "classroom-name");
-    input.classList.add("form-control");
-
-    let removeBtn = document.createElement('button');
-    removeBtn.classList.add("btn");
-    removeBtn.classList.add("btn-xs");
-    removeBtn.classList.add("btn-danger");
-    removeBtn.textContent = "remove class"
-    removeBtn.onclick = removeClassForm;
+    let div = createFormDiv();
+    let label = createFormLabel();
+    let input = createFormInput();
+    let removeBtn = createRemoveBtn();
 
     div.appendChild(label);
     div.appendChild(input);
