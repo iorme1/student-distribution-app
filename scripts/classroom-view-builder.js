@@ -8,10 +8,10 @@ function CreateViewBuilder() {
     let classroomsContainer = document.querySelector('.classrooms-container');
 
     for (let room in classes) {
+      let students = classes[room].students;
+
       let roomContainer = createRoomContainer(room)
       classroomsContainer.appendChild(roomContainer);
-
-      let students = classes[room].students;
 
       let studentHTMLrows = createStudentHTMLrows(students, room)
       studentHTMLrows.forEach(row => roomContainer.appendChild(row))
@@ -22,7 +22,7 @@ function CreateViewBuilder() {
       let statsHTMLrows = createStatsHTMLrows(classes[room]);
       statsHTMLrows.forEach(row => roomStatsContainer.appendChild(row));
     }
-    ClassroomsData.setStudentBlock()
+    ClassroomsData.setStudentSwappable();
   }
 
   function createRoomStatsContainer() {
@@ -54,6 +54,75 @@ function CreateViewBuilder() {
     return roomContainer;
   }
 
+  function createRow(htmlClassname) {
+    let row = document.createElement('div');
+    row.classList.add("row");
+    row.classList.add("no-gutters");
+    row.classList.add(htmlClassname);
+
+    return row;
+  }
+
+  function createAttrP(attr) {
+    let attr_p = document.createElement('p');
+    attr_p.textContent = attr;
+
+    return attr_p
+  }
+
+  function getStudentName(student) {
+    for (let key in student) if(key.includes("name")) return student[key]
+  }
+
+  function createCol6() {
+    let col = document.createElement('div');
+    col.classList.add("col-6");
+
+    return col;
+  }
+
+  function createStudentDiv(studentName, roomName) {
+    let studentDiv = document.createElement('div');
+    studentDiv.classList.add("student");
+    studentDiv.classList.add("swappable");
+    studentDiv.onmouseover = displayStudentStats;
+    studentDiv.dataset.identifier = studentName;
+    studentDiv.dataset.classroom = roomName;
+    studentDiv.textContent = `${studentName} - `;
+
+    return studentDiv;
+  }
+
+  function createStudentSpan(student, targetAttribute) {
+    let span = document.createElement('span');
+    span.classList.add("ml-1");
+    span.classList.add("score");
+    span.textContent = student[targetAttribute];
+
+    return span;
+  }
+
+  function createStatSpan(attr, room) {
+    let span = document.createElement('span');
+    span.classList.add("ml-1");
+    span.classList.add("stat-score");
+    span.dataset.attribute = attr;
+    span.textContent = room.attributeTotals[attr];
+
+    return span;
+  }
+
+  function createEmptySlot(roomName) {
+    let emptySlot = document.createElement('div');
+    emptySlot.classList.add("swappable");
+    emptySlot.classList.add("student");
+    emptySlot.classList.add("empty-seat");
+    emptySlot.dataset.identifier = "empty-slot";
+    emptySlot.dataset.classroom = roomName;
+    emptySlot.textContent = '- empty slot -';
+
+    return emptySlot;
+  }
 
   function createStudentHTMLrows(studentList, roomName) {
     let students = [...studentList];
@@ -63,63 +132,27 @@ function CreateViewBuilder() {
 
     while (true) {
       if (students.length == 0) break;
-      /* create the row that contains 2 columns */
-      let row = document.createElement('div');
-      row.classList.add("row");
-      row.classList.add("no-gutters");
-      row.classList.add("student-row");
-      /* end row */
 
-      /* create first student for col 1 */
+      let row = createRow("student-row");
+
       let student1 = students.pop();
-      let student1Name;
+      let student1Name = getStudentName(student1)
 
-      for (let key in student1) {
-        let attr = key.toLowerCase();
-        if (attr.includes("name")) {
-          student1Name = student1[key]
-          break;
-        }
-      }
-
-      let col1 = document.createElement('div');
-      col1.classList.add("col-6");
-
-      let student1Div = document.createElement('div');
-      student1Div.classList.add("student");
-      student1Div.classList.add("swappable");
-      student1Div.onmouseover = displayStudentStats;
-      student1Div.dataset.identifier = student1Name;
-      student1Div.dataset.classroom = roomName;
-      student1Div.textContent = `${student1Name} - `
-
-      let span1 = document.createElement('span');
-      span1.classList.add("ml-1");
-      span1.classList.add("score");
-      span1.textContent = student1[targetAttribute];
+      let col1 = createCol6();
+      let student1Div = createStudentDiv(student1Name, roomName)
+      let span1 = createStudentSpan(student1, targetAttribute)
 
       student1Div.appendChild(span1);
-
       col1.appendChild(student1Div);
       row.appendChild(col1);
-      /* end col 1 */
 
       if (students.length == 0) {
         /* create empty slot here */
         if(emptySlots >= 1) {
           emptySlots--;
 
-          let emptySlotCol = document.createElement('div');
-          emptySlotCol.classList.add("col-6");
-
-          let emptySlotDiv = document.createElement('div');
-
-          emptySlotDiv.classList.add("swappable");
-          emptySlotDiv.classList.add("student");
-          emptySlotDiv.classList.add("empty-seat");
-          emptySlotDiv.dataset.identifier = "empty-slot";
-          emptySlotDiv.dataset.classroom = roomName;
-          emptySlotDiv.textContent = '- empty slot -';
+          let emptySlotCol = createCol6();
+          let emptySlotDiv = createEmptySlot(roomName);
 
           emptySlotCol.appendChild(emptySlotDiv);
           row.appendChild(emptySlotCol);
@@ -129,60 +162,23 @@ function CreateViewBuilder() {
         break;
       }
 
-      /* create student 2 for 2nd column in row */
       let student2 = students.pop();
+      let student2Name = getStudentName(student2)
 
-      let student2Name;
-
-      for (let key in student2) {
-        let attr = key.toLowerCase();
-        if (attr.includes("name")) {
-          student2Name = student2[key]
-          break;
-        }
-      }
-
-      let col2 = document.createElement('div');
-      col2.classList.add("col-6");
-
-      let student2Div = document.createElement('div');
-      student2Div.classList.add("student");
-      student2Div.classList.add("swappable");
-      student2Div.onmouseover = displayStudentStats;
-      student2Div.dataset.identifier = student2Name
-      student2Div.dataset.classroom = roomName
-      student2Div.textContent = `${student2Name} - `
-
-      let span2 = document.createElement('span');
-      span2.classList.add("ml-1")
-      span2.classList.add("score")
-      span2.textContent = student2[targetAttribute];
+      let col2 = createCol6();
+      let student2Div = createStudentDiv(student2Name, roomName);
+      let span2 = createStudentSpan(student2, targetAttribute)
 
       student2Div.appendChild(span2)
-
       col2.appendChild(student2Div);
       row.appendChild(col2);
-      /*  end col 2 */
       rows.push(row);
     }
-
+    // add remaining empty seat slots to classroom
     while (emptySlots > 0) {
-      let row = document.createElement('div');
-      row.classList.add("row");
-      row.classList.add("no-gutters");
-      row.classList.add("student-row");
-
-      let emptySlotCol1 = document.createElement('div');
-      emptySlotCol1.classList.add("col-6");
-
-      let emptySlotDiv1 = document.createElement('div');
-
-      emptySlotDiv1.classList.add("swappable");
-      emptySlotDiv1.classList.add("student");
-      emptySlotDiv1.classList.add("empty-seat");
-      emptySlotDiv1.dataset.identifier = "empty-slot";
-      emptySlotDiv1.dataset.classroom = roomName;
-      emptySlotDiv1.textContent = '- empty slot -';
+      let row = createRow("student-row")
+      let emptySlotCol1 = createCol6();
+      let emptySlotDiv1 = createEmptySlot(roomName);
 
       emptySlotCol1.appendChild(emptySlotDiv1);
       row.appendChild(emptySlotCol1);
@@ -194,26 +190,15 @@ function CreateViewBuilder() {
         break;
       }
 
-      let emptySlotCol2 = document.createElement('div');
-      emptySlotCol2.classList.add("col-6");
-
-      let emptySlotDiv2 = document.createElement('div');
-
-      emptySlotDiv2.classList.add("swappable");
-      emptySlotDiv2.classList.add("student");
-      emptySlotDiv2.classList.add("empty-seat");
-      emptySlotDiv2.dataset.identifier = "empty-slot";
-      emptySlotDiv2.dataset.classroom = roomName;
-      emptySlotDiv2.textContent = '- empty slot -';
+      let emptySlotCol2 = createCol6();
+      let emptySlotDiv2 = createEmptySlot(roomName);
 
       emptySlotCol2.appendChild(emptySlotDiv2);
       row.appendChild(emptySlotCol2);
 
       emptySlots--;
-
       rows.push(row)
     }
-
     return rows;
   }
 
@@ -224,25 +209,14 @@ function CreateViewBuilder() {
 
       while (true) {
         if (attributes.length == 0) break;
-        /* create the row that contains 2 columns */
-        let row = document.createElement('div');
-        row.classList.add("row");
-        row.classList.add("no-gutters");
-        row.classList.add("stats");
-        /* end row */
+
+        let row = createRow("stats");
 
         let attr1 = attributes.pop();
-        let col1 = document.createElement('div');
-        col1.classList.add("col-6");
+        let col1 = createCol6();
 
-        let attr1_p = document.createElement('p');
-        attr1_p.textContent = attr1
-
-        let span1 = document.createElement('span');
-        span1.classList.add("ml-1")
-        span1.classList.add("stat-score")
-        span1.dataset.attribute = attr1;
-        span1.textContent = room.attributeTotals[attr1];
+        let attr1_p = createAttrP(attr1);
+        let span1 = createStatSpan(attr1, room);
 
         attr1_p.appendChild(span1)
         col1.appendChild(attr1_p);
@@ -254,17 +228,10 @@ function CreateViewBuilder() {
         }
 
         let attr2 = attributes.pop();
-        let col2 = document.createElement('div');
-        col2.classList.add("col-6");
+        let col2 = createCol6();
 
-        let attr2_p = document.createElement('p');
-        attr2_p.textContent = attr2;
-
-        let span2 = document.createElement('span');
-        span2.classList.add("ml-1")
-        span2.classList.add("stat-score")
-        span2.dataset.attribute = attr2;
-        span2.textContent = room.attributeTotals[attr2];
+        let attr2_p = createAttrP(attr2);
+        let span2 = createStatSpan(attr2, room);
 
         attr2_p.appendChild(span2)
         col2.appendChild(attr2_p);
@@ -303,7 +270,7 @@ function CreateViewBuilder() {
     let roomName = studentElmnt.dataset.classroom;
     let classroomObj = ClassroomsData.getClassroom(roomName);
     let studentObj = classroomObj.students.find(student => {
-      return student.Name == studentName;
+      return student["name"] == studentName;
     })
 
     showHTMLstudentData(studentElmnt, studentObj)

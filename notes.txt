@@ -1,3 +1,23 @@
+FINISH breaking down functions in view builder file, still have some
+super long element creation functions (look into jQuery after this
+for shorter syntax/cleaner code for element creation)
+
+you have an updateStatsView method in classrooms manager that should
+be moved over to view builder appropriately.
+
+decide if u want a standard excel document attribute for "name"...
+this leads into other questions about how specific the format needs
+to be without being TOO strict. 
+
+add feature to click on certain classroom stats like: males, females,
+lowReader, special Ed, etc and highlight all those students in that
+classroom.
+
+add feature to mouseover student to get full student data
+
+Need to have form checks that validate unique classroom names, all fields
+filled out, etc.
+
 Figure out how to setup an "order" of operations for a user to
 make for better user experience, make it very clear and only
 give option for creating classrooms FIRST, THEN show import
@@ -8,12 +28,3 @@ to let user know that the attribute chosen to organize their
 students by was not input correctly, etc.  going to need to find
 all places where user error from mistyping anything can be saved
 and displayed properly to the user.
-
-Need to have form checks that validate unique classroom names, all fields
-filled out, etc.
-
-add feature to click on certain classroom stats like: males, females,
-lowReader, special Ed, etc and highlight all those students in that
-classroom.
-
-add feature to mouseover student to get full student data 

@@ -217,14 +217,14 @@ function ClassroomsManager() {
     ViewBuilder.classroomHTMLBuilder();
   }
 
-  function setStudentBlock() {
-    let studentBlock = new Swappable
+  function setStudentSwappable() {
+    let studentSwappable = new Swappable
       .default(document.querySelectorAll('.swappable'), {
         draggable: 'div'
       });
 
-    studentBlock.on("drag:over:container", setLastOverElement)
-    studentBlock.on("drag:stop", handleStudentSwap)
+    studentSwappable.on("drag:over:container", setLastOverElement)
+    studentSwappable.on("drag:stop", handleStudentSwap)
   }
 
   function setLastOverElement() {
@@ -350,7 +350,7 @@ function ClassroomsManager() {
     organizeStudentsByTargetAttribute,
     getClassroomAttributes,
     getLowestClassScore,
-    setStudentBlock,
+    setStudentSwappable,
     getMaxCapacity,
     setMaxCapacity
   }
