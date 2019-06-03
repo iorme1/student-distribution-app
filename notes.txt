@@ -1,16 +1,12 @@
-FINISH breaking down functions in view builder file, still have some
-super long element creation functions
+**** stat should be highlighted as well so user remembers what stat they had
+highlighted ***
+
+Add remove highlights button or text on classroom tables
+
+Add "bank" to hold students when a user is unsure where to move them
 
 you have an updateStatsView method in classrooms manager that should
 be moved over to view builder appropriately.
-
-decide if u want a standard excel document attribute for "name"...
-this leads into other questions about how specific the format needs
-to be without being TOO strict.
-
-add feature to click on certain classroom stats like: males, females,
-lowReader, special Ed, etc and highlight all those students in that
-classroom.
 
 Need to have form checks that validate unique classroom names, all fields
 filled out, etc.
@@ -25,3 +21,43 @@ to let user know that the attribute chosen to organize their
 students by was not input correctly, etc.  going to need to find
 all places where user error from mistyping anything can be saved
 and displayed properly to the user.
+
+Remember to add disclaimer or something to mention how to setup
+excel file now that you know the format for binary items/ranking items/name/sex
+
+keep checking for break down of functions/methods to make  smaller and more
+concise / additional refactors.
+
+
+Browser Compatibility / OS Compatibility:
+---------------------
+Chrome -> works fine on both windows and mac
+FireFox -> works fine on both windows and mac
+Safari -> everything works fine except Minor bug on stats display...
+          ..some overlapping of text for some reason. unique to safari so far.
+
+Internet Explorer Bugs:
+-----------------------
+onkeyup or something not working, classrooms not showing up on form
+when I type in number of classrooms
+
+
+
+
+Thoughts for Backend:
+-------------------
+- User accounts
+- User needs to be able to save what they have
+
+ actions to be sent to backend:
+ -----------------------------
+ Because the objects are set up nicely to resemble the html at every
+ point after every swap. I would just add a "save" button. This save button
+ will grab the relevant object information, convert to json and send to Rails
+ API Backend.
+
+...So a user can sign into their account. Click retrieve saved classrooms.
+backend will respond with the appropriate data, which will then be saved
+in the frontend objects and displayed to the user.
+
+Probably will use JWT for authentication.

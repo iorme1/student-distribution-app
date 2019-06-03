@@ -52,8 +52,8 @@ function ClassroomsManager() {
         room.attributeTotals.males-- :
         room.attributeTotals.females--;
         /* if the student attribute isn't relevant to classroom attributeTotals
-         then we skip the attribute  (i.e name, etc) */
-      } else if (room.attributeTotals[attr] == undefined || attr == "name") {
+         then we skip the attribute  (i.e name) */
+      } else if (room.attributeTotals[attr] == undefined) {
         continue;
       } else if (state.classroomAttributes[attr] == "binary type") {
           if (student[attr] == "yes") room.attributeTotals[attr]--;
@@ -78,7 +78,7 @@ function ClassroomsManager() {
         room.attributeTotals.females++;
         /* if the student attribute isn't relevant to classroom attributeTotals
          then we skip the attribute  (i.e name, etc) */
-      } else if (room.attributeTotals[attr] == undefined || attr == "name") {
+      } else if (room.attributeTotals[attr] == undefined) {
         continue;
       } else if (state.classroomAttributes[attr] == "binary type") {
           if(student[attr] == "yes") room.attributeTotals[attr]++;
@@ -155,8 +155,11 @@ function ClassroomsManager() {
     /* creates classroom attribute/value types for state. used for
     instances where we only need the classroom attribute name and/or type */
     for (let attr in students) {
+      /* skip name and sex because they are not used as properties on
+       classroom.AttributeTotals object */
       if (attr.includes("name") || attr.includes("sex")) continue;
-
+      /* yes/no student attribute values mean we want set this property
+       as a binary type */
       if (students[attr] == "yes" || students[attr] == "no") {
         state.classroomAttributes[attr] = "binary type";
       } else {
