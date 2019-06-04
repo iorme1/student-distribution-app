@@ -330,12 +330,26 @@ function CreateViewBuilder() {
   }
 
   function removeHighlightsAfterSwap(elmnt1, elmnt2) {
+    elmnt1.style.color = "red";
+    elmnt1.style.backgroundColor = 'lightblue';
+    elmnt1.style.border = "1px solid black";
+
+    elmnt2.style.color = "red";;
+    elmnt2.style.backgroundColor = 'lightblue';
+    elmnt2.style.border = "1px solid black";
+    animateCSS(elmnt1, 'flipInX')
+    animateCSS(elmnt2, 'flipInX')
+    
+    setTimeout(function() {
       elmnt1.style.color = "black";
       elmnt1.style.backgroundColor = '#FFDC00';
       elmnt1.style.border = "1px solid black";
+
       elmnt2.style.color = "black";
       elmnt2.style.backgroundColor = '#FFDC00';
       elmnt2.style.border = "1px solid black";
+    },1000)
+
   }
 
   function displayStudentStats() {
@@ -366,6 +380,19 @@ function CreateViewBuilder() {
     while (studentData.firstChild) {
       studentData.removeChild(studentData.firstChild);
     }
+  }
+
+  function animateCSS(element, animationName, callback) {
+    element.classList.add('animated', animationName)
+
+    function handleAnimationEnd() {
+        element.classList.remove('animated', animationName)
+        element.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+
+    element.addEventListener('animationend', handleAnimationEnd)
   }
 
   return {
