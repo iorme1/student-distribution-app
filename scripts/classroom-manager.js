@@ -56,7 +56,8 @@ function ClassroomsManager() {
       } else if (room.attributeTotals[attr] == undefined) {
         continue;
       } else if (state.classroomAttributes[attr] == "binary type") {
-          if (student[attr] == "yes") room.attributeTotals[attr]--;
+        /* binary types are Yes/No fields */
+        if (student[attr] == "yes") room.attributeTotals[attr]--;
       } else {
         /* all other attributes will be decreased based on this student's
          attribute value */
@@ -81,6 +82,7 @@ function ClassroomsManager() {
       } else if (room.attributeTotals[attr] == undefined) {
         continue;
       } else if (state.classroomAttributes[attr] == "binary type") {
+          /* binary types are Yes/No fields */
           if(student[attr] == "yes") room.attributeTotals[attr]++;
       } else {
         /* all other attributes will be increased based on this student's
@@ -102,16 +104,17 @@ function ClassroomsManager() {
 
   function addClassroom(roomName) {
     let classrooms = state.classrooms;
-    let room = {};
-
-    room.score = 0;
-    room.students = [];
-    /* sets default male female count properties,
-      more dynamic properties will be added to this object later
-      based on user's excel columns */
-    room.attributeTotals = {males: 0, females: 0};
+    let room = createRoomObject();
 
     classrooms[roomName] = room;
+  }
+
+  function createRoomObject() {
+     return {
+       score: 0,
+       students: [],
+       attributeTotals: {males: 0, females: 0}
+     }
   }
 
   function setTargetAttribute(attr) {
@@ -144,16 +147,23 @@ function ClassroomsManager() {
     let studentAttrs = getStudentAttributes();
     for (let room in classes) {
       let attributeTotals = classes[room].attributeTotals;
-
+      /* attributeTotals are the totals per classroom in relevant attributes
+       and the classroomAttributes set below/after this are more of a key
+       to check the "type" of the attribute itself.
+      */
       for (let attr in studentAttrs) {
         let attribute = studentAttrs[attr];
+        /* already added males/females properties for attributeTotals,
+        so we don't need to use "sex" attribute directly here. and name
+        attribute for students is irrelevant to attributeTotals */
         if (attribute.includes("name") || attribute.includes("sex")) continue;
 
         attributeTotals[attribute] = 0;
       }
     }
     /* creates classroom attribute/value types for state. used for
-    instances where we only need the classroom attribute name and/or type */
+    instances where we only need the classroom attribute name and/or need
+    to figure out the type (I.e "number" or "binary type") */
     for (let attr in students) {
       /* skip name and sex because they are not used as properties on
        classroom.AttributeTotals object */
@@ -261,8 +271,6 @@ function ClassroomsManager() {
   function handleStudentSwap() {
     let originalElement = document.querySelector('.draggable--original');
     let swappedWithElement = state.lastOverElement;
-    /* if elements previously highlighted, remove highlight after swap */
-    ViewBuilder.removeHighlightsAfterSwap(originalElement, swappedWithElement)
 
     if (isEmptySlot(originalElement) && isEmptySlot(swappedWithElement)) return;
 
@@ -271,6 +279,8 @@ function ClassroomsManager() {
 
     if (origRoomName == swapRoomName) return;
 
+    ViewBuilder.removeHighlightsAfterSwap(originalElement, swappedWithElement)
+    
     let origRoomNameObj = state.classrooms[origRoomName];
     let swapRoomNameObj = state.classrooms[swapRoomName];
 

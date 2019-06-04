@@ -217,7 +217,8 @@ function CreateViewBuilder() {
 
         let attr1_p = createP(attr1);
         attr1_p.dataset.classroom = roomName;
-        attr1_p.onclick = highlightRelevantStudents;
+        attr1_p.dataset.active = "no";
+        attr1_p.onclick = toggleHighLightRelevantStudents;
         let span1 = createStatSpan(attr1, room);
 
         attr1_p.appendChild(span1)
@@ -234,7 +235,8 @@ function CreateViewBuilder() {
 
         let attr2_p = createP(attr2);
         attr2_p.dataset.classroom = roomName;
-        attr2_p.onclick = highlightRelevantStudents;
+        attr2_p.dataset.active = "no";
+        attr2_p.onclick = toggleHighLightRelevantStudents;
         let span2 = createStatSpan(attr2, room);
 
         attr2_p.appendChild(span2)
@@ -268,9 +270,10 @@ function CreateViewBuilder() {
     }
   }
 
-  function highlightRelevantStudents() {
+  function toggleHighLightRelevantStudents() {
     let attribute = this.firstElementChild.dataset.attribute;
     let datasetRoomName = this.dataset.classroom;
+
     let classroom = ClassroomsData.getClassroom(datasetRoomName);
     let students = classroom.students;
     let classroomContainer = document
@@ -279,6 +282,13 @@ function CreateViewBuilder() {
     let studentsHTML = classroomContainer.querySelectorAll('.student');
     let relevantStudents = new Set();
     let classroomAttributes = ClassroomsData.getClassroomAttributes();
+
+    /* only dealing with binary types and males/female highlights */
+    if (classroomAttributes[attribute] != "binary type" &&
+        attribute != "males"
+        && attribute != "females") {
+        return;
+      }
 
     studentsHTML.forEach(student => {
       student.style.color = "black";
@@ -360,7 +370,8 @@ function CreateViewBuilder() {
 
   return {
     removeHighlightsAfterSwap,
-    classroomHTMLBuilder
+    classroomHTMLBuilder,
+    toggleHighLightRelevantStudents
   }
 }
 
