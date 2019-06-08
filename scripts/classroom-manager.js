@@ -245,7 +245,6 @@ function ClassroomsManager() {
 
       addStudent(targetClass, student)
     }
-    console.log(state)
     ViewBuilder.classroomHTMLBuilder();
   }
 

@@ -16,7 +16,7 @@ function saveClassroomData() {
 }
 
 function requestSaveData() {
-  /* let baseURL = 'http://localhost:3001/api/v1';   for development */
+  //let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   let classroomsState = ClassroomsData.getState();
 
@@ -27,7 +27,7 @@ function requestSaveData() {
     console.log("response", data)
     alertSuccess("You have successfully saved your data.")
   })
-  .catch(err => alertWarning("Error saving your data. Try again."))
+  .catch(err => alertWarning(err))
 }
 
 function userCreatedClassrooms() {

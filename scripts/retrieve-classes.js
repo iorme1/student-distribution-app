@@ -3,7 +3,7 @@ import { postData } from './post.js';
 import { alertWarning, alertSuccess } from './alerts.js';
 
 function retrieveClassroomData() {
-  /* let baseURL = 'http://localhost:3001/api/v1';   for development */
+  //let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   let token = JSON.parse(localStorage.getItem("jwt")).auth_token
 
@@ -17,7 +17,7 @@ function retrieveClassroomData() {
     ClassroomsData.setState(newState);
     alertSuccess("You have successfully retrieved your data.")
   })
-  .catch(err => alertWarning(`Error retrieving your data. Try again.\n ${err}`))
+  .catch(err => alertWarning(err))
 }
 
 document.querySelector('.retrieve-classrooms-btn').onclick = retrieveClassroomData;

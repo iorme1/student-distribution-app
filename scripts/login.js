@@ -3,7 +3,7 @@ import { alertSuccess, alertWarning } from './alerts.js';
 
 function login(e) {
   let form = this;
-  /* let baseURL = 'http://localhost:3001/api/v1';   for development */
+  //let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   e.preventDefault()
   $('#modalLoginForm').modal('toggle');
@@ -19,7 +19,7 @@ function login(e) {
     setJWT(token);
     alertSuccess('You have successfully logged in.')
   })
-  .catch(err => alertWarning("Error logging into your account. Try again."))
+  .catch(err => alertWarning(err))
 
 }
 

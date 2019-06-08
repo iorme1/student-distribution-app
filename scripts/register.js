@@ -9,7 +9,7 @@ function showRegisterModal() {
 function registerAccount(e) {
   e.preventDefault();
   let form = this;
-  /* let baseURL = 'http://localhost:3001/api/v1';   for development */
+  // let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   let email = form.elements["email"].value
   let password = form.elements["password"].value
@@ -19,10 +19,10 @@ function registerAccount(e) {
     password: password
   })
   .then(data => {
-    alertSuccess("You have successfully registered an account.")
     $('#modalRegisterForm').modal('toggle');
+    alertSuccess("You have successfully registered an account.")
   })
-  .catch(err => alertWarning("Error registering your account. Try again."))
+  .catch(err => alertWarning(err))
 }
 
 
