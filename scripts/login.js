@@ -1,5 +1,6 @@
 import { postData } from './post.js';
 import { alertSuccess, alertWarning } from './alerts.js';
+import { ViewBuilder } from './classroom-view-builder.js';
 
 function login(e) {
   let form = this;
@@ -20,6 +21,7 @@ function login(e) {
     let auth_token = token["auth_token"]
     if (auth_token) {
       setJWT(auth_token);
+      ViewBuilder.setCurrentUser(email);
       alertSuccess('You have successfully logged in.')
     } else {
       alertWarning("Invalid login credentials")

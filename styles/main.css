@@ -146,6 +146,11 @@ body {
   background-color: #B10DC9 !important;
 }
 
+.account-name {
+  color: #B10DC9;
+  font-size: 18px;
+}
+
 @media only screen and (max-width: 768px) {
   .student-data {
     display: none;

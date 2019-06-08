@@ -409,12 +409,18 @@ function CreateViewBuilder() {
     root.innerHTML = "";
   }
 
+  function setCurrentUser(email) {
+    let usernameElmnt = document.querySelector('.account-name');
+    usernameElmnt.textContent = `Logged in as ${email}`;
+  }
+
   return {
     showOrganizeButton,
     removeHighlightsAfterSwap,
     classroomHTMLBuilder,
     toggleHighLightRelevantStudents,
-    removeClassroomHTML
+    removeClassroomHTML,
+    setCurrentUser
   }
 }
 
