@@ -1,23 +1,37 @@
+
+API request / JWT related:
+---------------------------
+- *** DISPLAY the logged in user's name on the navbar... ***
+
+-DEFINITELY add a clear loading icon for the requests that take longer/because ur heroku
+server sleeps. Maybe pay for this one soon?
+
+
+
+
+Other priorities:
+-----------------
 **** stat should be highlighted as well so user remembers what stat they had
 highlighted, also add aggregate highlights (male and special ed, etc.)***
-
-ADD README, with demo video and setup instructions.
-
-Add remove highlights button or text on classroom tables
+  ...also if u click again on a highlightable state, remove the highlight.
 
 Add "bank" to hold students when a user is unsure where to move them
 
-you have an updateStatsView method in classrooms manager that should
-be moved over to view builder appropriately.
-
+error handling for having incorrect "main metric attribute" not on excel
+file ... tricky because app wont have the excel file yet...will have to show
+up soon after they import the file, and error must handle gracefully.
 Need to have form checks that validate unique classroom names, all fields
 filled out, etc.
 
-going to need to throw errors and use some kind of sweet alert
-to let user know that the attribute chosen to organize their
-students by was not input correctly, etc.  going to need to find
-all places where user error from mistyping anything can be saved
-and displayed properly to the user.
+
+Other:
+--------
+ADD README, with demo video and setup instructions.
+
+-Show and hide  Save/Retrieve classrooms based on login
+
+you have an updateStatsView method in classrooms manager that should
+be moved over to view builder appropriately.
 
 Remember to add disclaimer or something to mention how to setup
 excel file now that you know the format for binary items/ranking items/name/sex

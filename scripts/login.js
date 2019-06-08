@@ -5,26 +5,31 @@ function login(e) {
   let form = this;
   //let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
+  let url = `${baseURL}/authenticate`;
   e.preventDefault()
   $('#modalLoginForm').modal('toggle');
 
   let email = form.elements["email"].value
   let password = form.elements["password"].value
 
-  postData(`${baseURL}/authenticate`, {
+  postData(url, {
     email: email,
     password: password
   })
   .then(token => {
-    setJWT(token);
-    alertSuccess('You have successfully logged in.')
+    let auth_token = token["auth_token"]
+    if (auth_token) {
+      setJWT(auth_token);
+      alertSuccess('You have successfully logged in.')
+    } else {
+      alertWarning("Invalid login credentials")
+    }
   })
   .catch(err => alertWarning(err))
-
 }
 
-function setJWT(token) {
-  localStorage.setItem("jwt", JSON.stringify(token));
+function setJWT(auth_token) {
+  localStorage.setItem("jwt", auth_token);
 }
 
 document.querySelector('.login-form')

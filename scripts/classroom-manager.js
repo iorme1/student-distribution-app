@@ -108,6 +108,8 @@ function ClassroomsManager() {
 
   function setState(newState) {
     state = newState;
+    // remove current classrooms if there are any and replace with saved data
+    ViewBuilder.removeClassroomHTML();
     ViewBuilder.classroomHTMLBuilder();
   }
 

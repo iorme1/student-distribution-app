@@ -9,7 +9,7 @@ function showRegisterModal() {
 function registerAccount(e) {
   e.preventDefault();
   let form = this;
-  // let baseURL = 'http://localhost:3001/api/v1';
+  //let baseURL = 'http://localhost:3001/api/v1';
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   let email = form.elements["email"].value
   let password = form.elements["password"].value

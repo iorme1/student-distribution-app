@@ -402,14 +402,19 @@ function CreateViewBuilder() {
       orgBtn.classList.add('animated');
       orgBtn.classList.add('bounceInDown');
     },200)
+  }
 
+  function removeClassroomHTML() {
+    let root = document.querySelector('.classrooms-container');
+    root.innerHTML = "";
   }
 
   return {
     showOrganizeButton,
     removeHighlightsAfterSwap,
     classroomHTMLBuilder,
-    toggleHighLightRelevantStudents
+    toggleHighLightRelevantStudents,
+    removeClassroomHTML
   }
 }
 

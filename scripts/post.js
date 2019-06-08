@@ -1,8 +1,12 @@
+import { checkForToken } from './check-for-token.js';
+
 function postData(url = '', data = {}, authResource=false) {
     let headers = {'Content-Type': 'application/json'};
 
     if (authResource) {
-      let token = JSON.parse(localStorage.getItem("jwt")).auth_token
+      let token = checkForToken();
+      if (!token) return;
+      token = localStorage.getItem("jwt");
       headers['Authorization'] = 'Bearer ' + token;
     }
 
