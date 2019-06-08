@@ -19,8 +19,8 @@ function registerAccount(e) {
     password: password
   })
   .then(data => {
-    console.log("response", data)
     alertSuccess("You have successfully registered an account.")
+    $('#modalRegisterForm').modal('toggle');
   })
   .catch(err => alertWarning("Error registering your account. Try again."))
 }
