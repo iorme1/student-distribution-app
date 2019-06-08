@@ -5,7 +5,7 @@ import { ViewBuilder } from "./classroom-view-builder.js"
 const ClassroomsData = ClassroomsManager();
 
 function ClassroomsManager() {
-   const state = {
+   let state = {
      classrooms: {},
      studentAttributes: [],
      classroomAttributes: {
@@ -100,6 +100,15 @@ function ClassroomsManager() {
 
   function getClassroom(classroomName) {
     return state.classrooms[classroomName];
+  }
+
+  function getState() {
+    return state;
+  }
+
+  function setState(newState) {
+    state = newState;
+    ViewBuilder.classroomHTMLBuilder();
   }
 
   function addClassroom(roomName) {
@@ -236,7 +245,7 @@ function ClassroomsManager() {
 
       addStudent(targetClass, student)
     }
-
+    console.log(state)
     ViewBuilder.classroomHTMLBuilder();
   }
 
@@ -280,7 +289,7 @@ function ClassroomsManager() {
     if (origRoomName == swapRoomName) return;
 
     ViewBuilder.removeHighlightsAfterSwap(originalElement, swappedWithElement)
-    
+
     let origRoomNameObj = state.classrooms[origRoomName];
     let swapRoomNameObj = state.classrooms[swapRoomName];
 
@@ -377,11 +386,13 @@ function ClassroomsManager() {
     getLowestClassScore,
     setStudentSwappable,
     getMaxCapacity,
-    setMaxCapacity
+    setMaxCapacity,
+    getState,
+    setState
   }
 }
 
 document.querySelector(".org-classes-btn")
-  .onclick = ClassroomsData.organizeStudentsByTargetAttribute
+  .onclick = ClassroomsData.organizeStudentsByTargetAttribute;
 
 export { ClassroomsData }

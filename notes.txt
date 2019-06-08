@@ -1,5 +1,7 @@
 **** stat should be highlighted as well so user remembers what stat they had
-highlighted ***
+highlighted, also add aggregate highlights (male and special ed, etc.)***
+
+ADD README, with demo video and setup instructions.
 
 Add remove highlights button or text on classroom tables
 
@@ -10,11 +12,6 @@ be moved over to view builder appropriately.
 
 Need to have form checks that validate unique classroom names, all fields
 filled out, etc.
-
-Figure out how to setup an "order" of operations for a user to
-make for better user experience, make it very clear and only
-give option for creating classrooms FIRST, THEN show import
-students button
 
 going to need to throw errors and use some kind of sweet alert
 to let user know that the attribute chosen to organize their
@@ -40,24 +37,3 @@ Internet Explorer Bugs:
 -----------------------
 onkeyup or something not working, classrooms not showing up on form
 when I type in number of classrooms
-
-
-
-
-Thoughts for Backend:
--------------------
-- User accounts
-- User needs to be able to save what they have
-
- actions to be sent to backend:
- -----------------------------
- Because the objects are set up nicely to resemble the html at every
- point after every swap. I would just add a "save" button. This save button
- will grab the relevant object information, convert to json and send to Rails
- API Backend.
-
-...So a user can sign into their account. Click retrieve saved classrooms.
-backend will respond with the appropriate data, which will then be saved
-in the frontend objects and displayed to the user.
-
-Probably will use JWT for authentication.

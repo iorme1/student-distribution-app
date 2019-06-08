@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   </head>
   <body>
-    <nav class="navbar navbar-dark navbar-expand-sm nav bg-dark">
+    <nav class="mynav navbar navbar-dark navbar-expand-lg nav bg-dark">
       <a href="#" class="navbar-brand navbar-text">Organize Your Classrooms</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,16 @@
             <button class="create-cr nav-link btn btn-success navbar-text m-2" data-toggle="modal" data-target="#modal-cr">Create Classrooms</button>
           </li>
           <li class="nav-item">
-            <button class="import-st nav-link btn btn-info navbar-text m-2" data-toggle="modal" data-target="#modal-fu">Import Students</button>
+            <button class="import-st nav-link btn btn-info navbar-text m-2">Import Students</button>
           </li>
           <li class="nav-item">
-            <button class="create-st nav-link btn btn-danger navbar-text m-2">Create Student</button>
+            <button class="account-btn nav-link btn btn-danger navbar-text m-2" data-toggle="modal" data-target="#modalLoginForm">Account Login</button>
+          </li>
+          <li class="nav-item">
+            <button class="save-classrooms-btn nav-link btn btn-warning navbar-text m-2">Save Classrooms</button>
+          </li>
+          <li class="nav-item">
+            <button class="retrieve-classrooms-btn nav-link btn btn-primary navbar-text m-2">Retrieve Classrooms</button>
           </li>
         </ul>
       </div>
@@ -92,6 +98,72 @@
     </div>
     <!-- end of import students modal --->
 
+    <!-- login modal -->
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <form class="login-form">
+              <div class="form-group">
+                <label for="email" class="col-form-label text-danger">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input">
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-form-label text-danger">Password</label>
+                <input type="text" name="password" class="form-control" placeholder="Password..." id="password-input">
+              </div>
+             <div class="form-group">
+                <input type="submit" class="btn btn-lg btn-success form-control" value="Login"/>
+             </div>
+           </form>
+          </div>
+          <div class="my-modal-footer text-center">
+            <p>Don't have an account yet?</p>
+            <button class="create-acct-btn btn btn-info">Create Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of login modal -->
+
+      <!-- register modal  -->
+    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <form class="register-form">
+              <div class="form-group">
+                <label for="email" class="col-form-label text-danger">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input-reg">
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-form-label text-danger">Password</label>
+                <input type="text" name="password" class="form-control" placeholder="Password..." id="password-input-reg">
+              </div>
+             <div class="form-group">
+                <input type="submit" class="btn btn-lg btn-success form-control" value="Sign Up"/>
+             </div>
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of register modal -->
+
+
+
 
     <div class="container">
       <div class="row mt-3">
@@ -109,6 +181,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/swappable.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+    <script src="./scripts/retrieve-classes.js" type="module"></script>
+    <script src="./scripts/save-classes.js" type="module"></script>
+    <script src="./scripts/alerts.js" type="module"></script>
+    <script src="./scripts/post.js" type="module"></script>
+    <script src="./scripts/login.js" type="module"></script>
+    <script src="./scripts/register.js" type="module"></script>
     <script src="./scripts/xlsx.full.min.js"></script>
     <script src="./scripts/parse-excel.js" type="module"></script>
     <script src="./scripts/drag.js" type="module"></script>

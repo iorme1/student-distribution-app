@@ -119,3 +119,41 @@ body {
 .student-data > p {
   margin-top: 10px;
 }
+
+.my-modal-footer {
+  border-top: 2px solid black;
+  padding: 20px;
+}
+
+.my-alert-warning {
+  display: none;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.my-alert-success {
+  display: none;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.mynav {
+  z-index: 1;
+}
+
+.org-classes-btn {
+  visibility: hidden;
+  background-color: #B10DC9 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .student-data {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .nav-item > button {
+    width: 180px;
+  }
+}

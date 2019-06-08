@@ -1,18 +1,10 @@
 import { ClassroomsData } from './classroom-manager.js';
+import { ViewBuilder } from './classroom-view-builder.js';
+import { alertSuccess, alertWarning } from './alerts.js';
 const StudentList = {};
 
 function handleFile() {
   let files = this.files, f = files[0];
-
-  if (!userCreatedClassrooms()) {
-    Swal.fire({
-      type: 'error',
-      title: 'Oops...',
-      text: 'You have not created your classrooms yet!',
-      footer: 'click on the "create classroom button"'
-    });
-    return;
-  }
 
   if (!validFileUpload(f.name)) {
     Swal.fire({
@@ -21,6 +13,7 @@ function handleFile() {
       text: 'Invalid File Format',
       footer: 'Please upload an excel file.'
     });
+    $('#file-upload').val('');
     return;
   }
 
@@ -33,6 +26,7 @@ function handleFile() {
     let worksheet = workbook.Sheets[firstSheetName];
 
     StudentList.data = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+    ViewBuilder.showOrganizeButton();
     $('#modal-fu').modal('toggle')
   };
   reader.readAsArrayBuffer(f);
@@ -60,7 +54,24 @@ function userCreatedClassrooms() {
   }
 }
 
+function openExcelFileUpload() {
+  if (!userCreatedClassrooms()) {
+    let msg = "I need some basic information about your classrooms first.  " +
+    "I opened the classroom form for you. It's behind this message =)";
+
+    alertWarning(msg);
+    $('#modal-cr').modal('toggle');
+    return;
+  } else {
+    $('#modal-fu').modal('toggle')
+  }
+}
+
+
+
 export { StudentList };
 
 document.querySelector("#file-upload")
   .addEventListener("change", handleFile, false);
+
+document.querySelector('.import-st').onclick = openExcelFileUpload

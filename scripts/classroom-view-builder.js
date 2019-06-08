@@ -339,7 +339,7 @@ function CreateViewBuilder() {
     elmnt2.style.border = "1px solid black";
     animateCSS(elmnt1, 'flipInX')
     animateCSS(elmnt2, 'flipInX')
-    
+
     setTimeout(function() {
       elmnt1.style.color = "black";
       elmnt1.style.backgroundColor = '#FFDC00';
@@ -395,7 +395,18 @@ function CreateViewBuilder() {
     element.addEventListener('animationend', handleAnimationEnd)
   }
 
+  function showOrganizeButton() {
+    let orgBtn = document.querySelector('.org-classes-btn');
+    setTimeout(() => {
+      orgBtn.style.visibility = "visible";
+      orgBtn.classList.add('animated');
+      orgBtn.classList.add('bounceInDown');
+    },200)
+
+  }
+
   return {
+    showOrganizeButton,
     removeHighlightsAfterSwap,
     classroomHTMLBuilder,
     toggleHighLightRelevantStudents
