@@ -151,6 +151,27 @@ body {
   font-size: 18px;
 }
 
+.load-icon {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 80px;
+  height: 80px;
+  background-color: #B10DC9;
+  border-radius: 100%;
+  z-index: 99;
+}
+
+.load-icon-text {
+  color: whitesmoke;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
 @media only screen and (max-width: 768px) {
   .student-data {
     display: none;

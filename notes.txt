@@ -1,9 +1,6 @@
 
 API request / JWT related:
 ---------------------------
--DEFINITELY add a clear loading icon for the requests that take longer/because ur heroku
-server sleeps. Maybe pay for this one soon?
-
 -User should automatically get logged in after creating an account
 
 Other priorities:

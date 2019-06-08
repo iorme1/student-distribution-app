@@ -2,6 +2,7 @@ import { ClassroomsData } from './classroom-manager.js';
 import { postData } from './post.js';
 import { alertWarning, alertSuccess } from './alerts.js';
 import { checkForToken } from './check-for-token.js';
+import { ViewBuilder } from './classroom-view-builder.js';
 
 function saveClassroomData() {
   let token = checkForToken();
@@ -27,12 +28,17 @@ function requestSaveData() {
   let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
   let classroomsState = ClassroomsData.getState();
   let url = `${baseURL}/save-state`;
+  ViewBuilder.showSpinner();
 
   postData(url, {state: classroomsState}, true)
     .then(data => {
+      ViewBuilder.removeSpinner();
       alertSuccess("You have successfully saved your data.")
     })
-    .catch(err => alertWarning(err))
+    .catch(err => {
+      ViewBuilder.removeSpinner();
+      alertWarning(err)
+    });
 }
 
 function userCreatedClassrooms() {

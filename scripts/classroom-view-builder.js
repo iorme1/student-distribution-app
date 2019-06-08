@@ -414,13 +414,31 @@ function CreateViewBuilder() {
     usernameElmnt.textContent = `Logged in as ${email}`;
   }
 
+  function showSpinner() {
+    let loadIcon = document.querySelector('.load-icon');
+    loadIcon.style.visibility = "visible";
+    loadIcon.classList.add("animated");
+    loadIcon.classList.add("bounce");
+    loadIcon.classList.add("infinite");
+  }
+
+  function removeSpinner() {
+    let loadIcon = document.querySelector('.load-icon');
+    loadIcon.style.visibility = "hidden";
+    loadIcon.classList.remove("animated")
+    loadIcon.classList.remove("bounce")
+    loadIcon.classList.remove("infinite")
+  }
+
   return {
     showOrganizeButton,
     removeHighlightsAfterSwap,
     classroomHTMLBuilder,
     toggleHighLightRelevantStudents,
     removeClassroomHTML,
-    setCurrentUser
+    setCurrentUser,
+    showSpinner,
+    removeSpinner
   }
 }
 
