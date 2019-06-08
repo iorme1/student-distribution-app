@@ -12,8 +12,8 @@ function login(e) {
   $('#modalLoginForm').modal('toggle');
   ViewBuilder.showSpinner();
 
-  let email = form.elements["email"].value
-  let password = form.elements["password"].value
+  let email = form.elements["email"].value;
+  let password = form.elements["password"].value;
 
   postData(url, {
     email: email,

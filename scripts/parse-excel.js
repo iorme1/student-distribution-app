@@ -44,34 +44,7 @@ function validFileUpload(fileName) {
   return false;
 }
 
-function userCreatedClassrooms() {
-  let classrooms = ClassroomsData.getAllClassrooms();
-
-  if (Object.keys(classrooms).length == 0) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function openExcelFileUpload() {
-  if (!userCreatedClassrooms()) {
-    let msg = "I need some basic information about your classrooms first.  " +
-    "I opened the classroom form for you. It's behind this message =)";
-
-    alertWarning(msg);
-    $('#modal-cr').modal('toggle');
-    return;
-  } else {
-    $('#modal-fu').modal('toggle')
-  }
-}
-
-
-
 export { StudentList };
 
 document.querySelector("#file-upload")
   .addEventListener("change", handleFile, false);
-
-document.querySelector('.import-st').onclick = openExcelFileUpload

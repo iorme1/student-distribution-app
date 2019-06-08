@@ -1,25 +1,29 @@
 
 API request / JWT related:
 ---------------------------
--User should automatically get logged in after creating an account
+-error handling for having incorrect "main metric attribute" not on excel
+file ... tricky because app wont have the excel file yet...will have to show
+up soon after they import the file, and error must handle gracefully.
+Need to have form checks that validate unique classroom names, all fields
+filled out, etc.
 
-Other priorities:
------------------
+ need to make a func call inside handleFileUpload method that checks whether
+ the targetAttribute is in the excel file...if they mistyped it,
+ there needs to be a fallback and removal of classroom data... in the
+ classroom form handler you need to validate the inputs to make sure
+ there isnt identical names for classrooms and that maxcapacity is filled
+ out.
+
+
 **** stat should be highlighted as well so user remembers what stat they had
 highlighted, also add aggregate highlights (male and special ed, etc.)***
   ...also if u click again on a highlightable state, remove the highlight.
 
 Add "bank" to hold students when a user is unsure where to move them
 
-error handling for having incorrect "main metric attribute" not on excel
-file ... tricky because app wont have the excel file yet...will have to show
-up soon after they import the file, and error must handle gracefully.
-Need to have form checks that validate unique classroom names, all fields
-filled out, etc.
-
 
 Other:
---------
+------
 ADD README, with demo video and setup instructions.
 
 -Show and hide  Save/Retrieve classrooms based on login

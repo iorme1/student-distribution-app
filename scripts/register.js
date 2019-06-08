@@ -1,5 +1,5 @@
 import { postData } from './post.js';
-import { alertSuccess, alertWarning } from './alerts.js'
+import { alertSuccess, alertWarning } from './alerts.js';
 import { ViewBuilder } from './classroom-view-builder.js';
 
 function showRegisterModal() {

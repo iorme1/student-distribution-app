@@ -1,4 +1,5 @@
 import { ClassroomsData } from './classroom-manager.js'
+import { alertWarning, alertSuccess } from './alerts.js';
 
 function removeClassForm() {
   let parent = this.parentNode;
@@ -88,6 +89,7 @@ function classRoomHandler(e) {
   ClassroomsData.setTargetAttribute(targetAttribute);
 
   classroomInputs.forEach(room => ClassroomsData.addClassroom(room.value));
+  $('#modal-fu').modal('toggle')
 }
 
 document.querySelector(".classroom-modal-input-fields")
