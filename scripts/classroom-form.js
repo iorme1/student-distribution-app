@@ -39,6 +39,7 @@ function createFormDiv() {
 
 function createFormInput() {
   let input = document.createElement('input');
+  input.required = true;
   input.setAttribute("type", "text");
   input.setAttribute("name", "classroom-name");
   input.classList.add("form-control");
@@ -77,13 +78,19 @@ function addClassNameInputs() {
 }
 
 function classRoomHandler(e) {
-  e.preventDefault()
-  $("#modal-cr").modal('toggle');
+  e.preventDefault();
 
   let form = this;
   let targetAttribute = form.elements["spread-factor"].value.toLowerCase();
   let classroomInputs = Array.from(form.elements["classroom-name"]);
   let maxCapacity = form.elements["max-capacity"].value
+
+  if (!hasUniqueValues(classroomInputs)) {
+    alertWarning('Your classroom names must be unique!')
+    return;
+  }
+
+  $("#modal-cr").modal('toggle');
 
   ClassroomsData.setMaxCapacity(maxCapacity);
   ClassroomsData.setTargetAttribute(targetAttribute);
@@ -91,6 +98,20 @@ function classRoomHandler(e) {
   classroomInputs.forEach(room => ClassroomsData.addClassroom(room.value));
   $('#modal-fu').modal('toggle')
 }
+
+function hasUniqueValues(inputs) {
+  let seen = new Set();
+
+  for (let i = 0; i < inputs.length; i++) {
+    if (seen.has(inputs[i].value)) {
+      return false;
+    } else {
+      seen.add(inputs[i].value);
+    }
+  }
+  return true;
+}
+
 
 document.querySelector(".classroom-modal-input-fields")
   .onsubmit = classRoomHandler;

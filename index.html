@@ -52,17 +52,17 @@
              <form class="classroom-modal-input-fields">
                <div class="form-group">
                  <label for="num-classrooms" class="col-form-label text-danger">Number of classrooms</label>
-                 <input type="number" name="num-classrooms" placeholder="0" id="num-classrooms-input">
+                 <input type="number" name="num-classrooms" placeholder="0" id="num-classrooms-input" required>
                </div>
                <div class="form-group">
                  <label for="max-capacity" class="col-form-label text-danger">Max capacity per class</label>
-                 <input type="number" name="max-capacity" placeholder="0" id="max-capacity-input">
+                 <input type="number" name="max-capacity" placeholder="0" id="max-capacity-input" required>
                </div>
                <div class="form-group">
                  <label for="spread-factor" class="col-form-label text-danger">
                    Attribute to Organize By<p class="text-info">(case insensitive and based on your excel attribute name)</p>
                  </label>
-                 <input type="text" name="spread-factor" class="form-control" placeholder="...Attribute to organize by" id="spread-factor-input">
+                 <input type="text" name="spread-factor" class="form-control" placeholder="...Attribute to organize by" id="spread-factor-input" required>
                </div>
               <div class="form-group">
                  <input type="submit" class="btn btn-lg btn-success form-control"/>
@@ -116,11 +116,11 @@
             <form class="login-form">
               <div class="form-group">
                 <label for="email" class="col-form-label text-danger">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input">
+                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input" required>
               </div>
               <div class="form-group">
                 <label for="password" class="col-form-label text-danger">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password..." id="password-input">
+                <input type="password" name="password" class="form-control" placeholder="Password..." id="password-input" required>
               </div>
              <div class="form-group">
                 <input type="submit" class="btn btn-lg btn-success form-control" value="Login"/>
@@ -150,11 +150,11 @@
             <form class="register-form">
               <div class="form-group">
                 <label for="email" class="col-form-label text-danger">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input-reg">
+                <input type="text" name="email" class="form-control" placeholder="Email..." id="email-input-reg" required>
               </div>
               <div class="form-group">
                 <label for="password" class="col-form-label text-danger">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password..." id="password-input-reg">
+                <input type="password" name="password" class="form-control" placeholder="Password..." id="password-input-reg" required>
               </div>
              <div class="form-group">
                 <input type="submit" class="btn btn-lg btn-success form-control" value="Sign Up"/>

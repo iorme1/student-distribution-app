@@ -1,6 +1,7 @@
 import { StudentList } from "./parse-excel.js";
 import { dragElement } from "./drag.js";
 import { ViewBuilder } from "./classroom-view-builder.js"
+import { alertWarning, alertSuccess } from './alerts.js';
 
 const ClassroomsData = ClassroomsManager();
 
@@ -104,6 +105,20 @@ function ClassroomsManager() {
 
   function getState() {
     return state;
+  }
+
+  function revertState() {
+    state = {
+      classrooms: {},
+      studentAttributes: [],
+      classroomAttributes: {
+        "males" : "number",
+        "females": "number"
+      },
+      targetAttribute: "",
+      lastOverElement: null,
+      maxCapacity: 0
+    }
   }
 
   function setState(newState) {
@@ -230,12 +245,28 @@ function ClassroomsManager() {
     return state.maxCapacity;
   }
 
+  function noMatchingAttribute(targetAttribute) {
+    let studentAttrs = state.studentAttributes;
+
+    return studentAttrs.indexOf(targetAttribute) === -1
+  }
+
   function organizeStudentsByTargetAttribute() {
-    this.style.display = "none"; // removes organize button
+    this.style.visibility = "hidden"; // removes organize button
 
     let students = formatStudentList();
 
     setAllAttributes(students[0]);
+    //check that target attribute matches any of the excel columns
+    if (noMatchingAttribute(state.targetAttribute)) {
+      let msg = 'It looks like your target attribute was not input properly. '+
+      'Please go back to the classroom form and re enter your target ' +
+      'attribute to match a column on your excel file';
+      $('#file-upload').val('');
+      revertState();
+      alertWarning(msg);
+      return;
+    }
 
     let sortedStudents = students.sort((a,b) => {
        return b[state.targetAttribute] - a[state.targetAttribute];
