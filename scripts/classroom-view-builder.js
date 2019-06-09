@@ -370,8 +370,8 @@ function CreateViewBuilder() {
     removePreviousData(studentData)
 
     for (let attr in studentObj) {
-      let text = `${attr}: ${studentObj[attr]}`
-      let p = createP(text)
+      let text = `${attr} - ${studentObj[attr]}`
+      let p = createP(text);
       studentData.appendChild(p);
     }
   }
