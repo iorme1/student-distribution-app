@@ -292,7 +292,7 @@ function CreateViewBuilder() {
 
     studentsHTML.forEach(student => {
       student.style.color = "black";
-      student.style.backgroundColor = '#FFDC00';
+      student.style.backgroundColor = 'lightyellow';
       student.style.border = "1px solid black";
     });
 
@@ -342,11 +342,11 @@ function CreateViewBuilder() {
 
     setTimeout(function() {
       elmnt1.style.color = "black";
-      elmnt1.style.backgroundColor = '#FFDC00';
+      elmnt1.style.backgroundColor = 'lightyellow';
       elmnt1.style.border = "1px solid black";
 
       elmnt2.style.color = "black";
-      elmnt2.style.backgroundColor = '#FFDC00';
+      elmnt2.style.backgroundColor = 'lightyellow';
       elmnt2.style.border = "1px solid black";
     },1000)
 

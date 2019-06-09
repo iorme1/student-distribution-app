@@ -52,7 +52,6 @@ body::after {
 }
 
 .classroom-title {
-  background-color: red;
   color: whitesmoke;
   padding: 3px;
   font-size: 20px;
@@ -74,7 +73,7 @@ body::after {
 }
 
 .student {
-  background-color: #FFDC00;
+  background-color: lightyellow;
   font-size: 15px;
   font-weight: bold;
   border: 1px solid black;
@@ -153,6 +152,7 @@ body::after {
 
 .mynav {
   z-index: 1;
+  opacity: 0.9;
 }
 
 .org-classes-btn {
@@ -161,14 +161,14 @@ body::after {
 }
 
 .account-name {
+  opacity: 0.9;
   color: whitesmoke;
   background: #555;
-  border: 1px solid black;
   padding: 3px;
   text-align: center;
   margin: 0 auto;
   width: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 18px;
   box-shadow: 0px 0px 1px 1px black;
 }
