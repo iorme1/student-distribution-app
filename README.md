@@ -1,4 +1,6 @@
 # Student Distribution
+Live App: https://student-distribution.herokuapp.com/index
+
 ![sample class data](https://user-images.githubusercontent.com/28276414/59533769-50eb7d80-8ea1-11e9-8ddb-fb27258d0988.png)
 
 ## Purpose
