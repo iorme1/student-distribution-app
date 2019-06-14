@@ -6,11 +6,9 @@ import { ViewBuilder } from './classroom-view-builder.js';
 
 function saveClassroomData() {
   let token = checkForToken();
+  if (!token) return;
 
-  if (!token) {
-    alertWarning('You have to be logged in to do that.');
-    return;
-  } else if (!userCreatedClassrooms()) {
+  if (!userCreatedClassrooms()) {
     Swal.fire({
       type: 'error',
       title: 'Oops...',
@@ -19,18 +17,17 @@ function saveClassroomData() {
     })
     return;
   } else {
-    requestSaveData();
+    requestSaveData(token);
   }
 }
 
-function requestSaveData() {
-  //let baseURL = 'http://localhost:3001/api/v1';
-  let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
+function requestSaveData(token) {
+  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1'
   let classroomsState = ClassroomsData.getState();
   let url = `${baseURL}/save-state`;
   ViewBuilder.showSpinner();
 
-  postData(url, {state: classroomsState}, true)
+  postData(url, {state: classroomsState}, token)
     .then(data => {
       ViewBuilder.removeSpinner();
       alertSuccess("You have successfully saved your data.")

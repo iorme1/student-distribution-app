@@ -1,11 +1,12 @@
 import { postData } from './post.js';
 import { alertSuccess, alertWarning } from './alerts.js';
 import { ViewBuilder } from './classroom-view-builder.js';
+import { AccountManager } from './account-manager.js';
 
 function login(e) {
   let form = this;
   //let baseURL = 'http://localhost:3001/api/v1';
-  let baseURL = 'https://student-distrubition-api.herokuapp.com/api/v1'
+  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1'
   let url = `${baseURL}/authenticate`;
 
   e.preventDefault()
@@ -24,10 +25,7 @@ function login(e) {
     let auth_token = token["auth_token"];
 
     if (auth_token) {
-      setJWT(auth_token);
-      setUser(email);
-      ViewBuilder.setCurrentUser(email);
-      alertSuccess('You have successfully logged in.')
+      AccountManager.setCredentials(auth_token, email)
     } else {
       alertWarning("Invalid login credentials")
     }

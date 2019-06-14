@@ -1,4 +1,5 @@
 import { ClassroomsData } from './classroom-manager.js';
+import { AccountManager } from './account-manager.js';
 import { dragElement } from './drag.js';
 
 function CreateViewBuilder() {
@@ -414,6 +415,11 @@ function CreateViewBuilder() {
     usernameElmnt.textContent = `Logged in as ${email}`;
   }
 
+  function removeCurrentUser() {
+    let usernameElmnt = document.querySelector('.account-name');
+    usernameElmnt.textContent = "You are not logged in";
+  }
+
   function showSpinner() {
     let loadIcon = document.querySelector('.load-icon');
     loadIcon.style.visibility = "visible";
@@ -430,6 +436,27 @@ function CreateViewBuilder() {
     loadIcon.classList.remove("infinite")
   }
 
+  function toggleAccountBtn(status) {
+    let accountBtn = document.querySelector('.account-btn');
+    let loginModal = document.querySelector('#modalLoginForm');
+
+    accountBtn.textContent = status;
+
+    if (status == "Account Logout") {
+      accountBtn.removeEventListener('click', toggleLoginModal)
+      accountBtn.addEventListener('click', AccountManager.removeCredentials);
+    } else {
+      accountBtn.removeEventListener('click', AccountManager.removeCredentials);
+      accountBtn.addEventListener('click', toggleLoginModal )
+    }
+  }
+
+  function toggleLoginModal() {
+    let loginModal = $('#modalLoginForm');
+    loginModal.modal('toggle');
+  }
+
+
   return {
     showOrganizeButton,
     removeHighlightsAfterSwap,
@@ -437,8 +464,10 @@ function CreateViewBuilder() {
     toggleHighLightRelevantStudents,
     removeClassroomHTML,
     setCurrentUser,
+    removeCurrentUser,
     showSpinner,
-    removeSpinner
+    removeSpinner,
+    toggleAccountBtn
   }
 }
 

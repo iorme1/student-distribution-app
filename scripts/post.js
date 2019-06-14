@@ -1,14 +1,9 @@
 import { checkForToken } from './check-for-token.js';
 
-function postData(url = '', data = {}, authResource=false) {
+function postData(url = '', data = {}, token=false) {
     let headers = {'Content-Type': 'application/json'};
 
-    if (authResource) {
-      let token = checkForToken();
-      if (!token) return;
-      token = localStorage.getItem("jwt");
-      headers['Authorization'] = 'Bearer ' + token;
-    }
+    if (token) headers['Authorization'] = 'Bearer ' + token;
 
     return fetch(url, {
         method: 'POST',

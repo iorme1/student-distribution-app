@@ -6,7 +6,10 @@ export function checkForToken() {
   if (token) {
     return token
   } else {
-    alertWarning('You have to be logged in to do that.')
+    let msg = "You have to be logged in to do that. If the application says "+
+    "you are logged in, then your session may have expired. Simply logout and "+
+    "log back in to renew your session.";
+    alertWarning(msg);
     return false;
   }
 }

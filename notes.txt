@@ -1,17 +1,27 @@
-
-API request / JWT related:
----------------------------
+BUGS
+------
+-bug when clicking a bunch of times on a student (i think only happens
+on students that have been previously moved?)
 
 -long names will overflow student columns, truncate the names
 
--add background design and style student data square nicer and more to the right.
- -cant just add one more classroom if you accidently put 3 and u wanted 4.. it wont
- error out but it doesnt do anything after trying to upload the student
- data after adding an additional classroom.
+-cant just add one more classroom if you accidently put 3 and u wanted 4.. it wont
+error out but it doesnt do anything after trying to upload the student
+data after adding an additional classroom.
+
+Features:
+----------
+-show parent participation or other "ranked" attribute numbers next to
+student went clicked on that particular "non-binary" stat
 
 -stat should be highlighted when clicked so user remembers what stat they had
 highlighted...if u click again on a highlightable state, remove the highlight.
     ...also think add aggregate highlights (male and special ed, etc.)
+
+-highlight boys blue and girls green or something like that, so we can
+get rid of the males/females attribute (MAYBE)
+
+-Add student cards  and manual student additions  (Big Feature)
 
 -Add "bank" to hold students when a user is unsure where to move them
   (..add another "table" called unknowns or something that is filled with
