@@ -1,3 +1,10 @@
+Add this to readme after you implement this functionality:
+
+  SIDENOTE:  The application will give you free sample data to play with
+   if you do not want to create your own excel file data. Simply click
+  "Get Sample Data" button on the navigation bar.
+-------------
+
 BUGS
 ------
 -bug when clicking a bunch of times on a student (i think only happens
