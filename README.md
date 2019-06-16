@@ -1,5 +1,5 @@
 # Student Distribution
-Live App: https://student-distribution.herokuapp.com/index
+Live App: https://student-distribution.herokuapp.com/
 
 ![sample class data](https://user-images.githubusercontent.com/28276414/59533769-50eb7d80-8ea1-11e9-8ddb-fb27258d0988.png)
 
@@ -33,6 +33,11 @@ in this README as a reference.
  formatting.
 
  <img width="761" alt="sample excel" src="https://user-images.githubusercontent.com/28276414/59538156-a9287c80-8ead-11e9-869b-7b593027e763.png">
+
+SIDE NOTE:
+The application will give you free sample data to play with
+if you do not want to create your own excel file data. Simply click
+"Get Sample Data" button on the navigation bar.
 
 
 -Go to https://github.com/iorme1/student-distribution-api and read setup

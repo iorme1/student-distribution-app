@@ -1,8 +1,8 @@
-Add this to readme after you implement this functionality:
 
-  SIDENOTE:  The application will give you free sample data to play with
-   if you do not want to create your own excel file data. Simply click
-  "Get Sample Data" button on the navigation bar.
+When your token expires, it doesnt give me the alert i wanted to show,
+it ends up in the catch err => and gives a json syntax error instead of
+the message mentioning your token may have expired, etc.
+
 -------------
 
 BUGS

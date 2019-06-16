@@ -6,7 +6,7 @@ import { AccountManager } from './account-manager.js';
 function login(e) {
   let form = this;
   //let baseURL = 'http://localhost:3001/api/v1';
-  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1'
+  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1';
   let url = `${baseURL}/authenticate`;
 
   e.preventDefault()
