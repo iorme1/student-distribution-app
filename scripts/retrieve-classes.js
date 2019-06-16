@@ -5,7 +5,7 @@ import { ViewBuilder } from './classroom-view-builder.js';
 
 function retrieveClassroomData() {
   //let baseURL = 'http://localhost:3001/api/v1';
-  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1''
+  let baseURL = 'https://student-distribution-api.herokuapp.com/api/v1';
   let url = `${baseURL}/retrieve-state`;
 
   let token = checkForToken();
