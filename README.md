@@ -19,10 +19,11 @@ in this README as a reference.
 
 
 ## Application Setup
- -Fork/clone this repository. Node is not setup on this application, so
+ Fork/clone this repository. Node is not setup on this application, so
  at this point I have been using my TextEditor's Live Server feature for development (I use Atom).
 
- -Remember to set URL's to localhost for all fetch requests to the backend API when working in development. Navigate to scripts folder and you will find the relevant urls to switch to localhost in the following files:  
+ Remember to set URL's to localhost for all fetch requests to the backend API when working in development. Navigate to scripts folder and you will find the relevant urls to switch to localhost in the following files:  
+
    login.js  
    register.js  
    retrieve-classes.js  
@@ -41,5 +42,5 @@ if you do not want to create your own excel file data. Simply click
 "Get Sample Data" button on the navigation bar.  
 
 
--Go to https://github.com/iorme1/student-distribution-api and read setup
+Go to https://github.com/iorme1/student-distribution-api and read setup
 guide for setting up backend locally.
