@@ -37,18 +37,12 @@ get rid of the males/females attribute (MAYBE)
 
 Other:
 ------
-ADD README, with demo video and setup instructions.
-
--Show and hide  Save/Retrieve classrooms based on login
-
 you have an updateStatsView method in classrooms manager that should
 be moved over to view builder appropriately.
 
-Remember to add disclaimer or something to mention how to setup
-excel file now that you know the format for binary items/ranking items/name/sex
-
 keep checking for break down of functions/methods to make  smaller and more
-concise / additional refactors.
+concise / additional refactors. Possible refactor nested state in
+ClassroomsManager
 
 
 Browser Compatibility / OS Compatibility:

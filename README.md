@@ -11,22 +11,22 @@ The application will obtain the information it needs from the user by presenting
 in this README as a reference.
 
 ## Technologies Used
- -Bootstrap 4
- -SheetJS excel parser library
- -Animate.css library for animations
- -jQuery
- -SweetAlert2
+ Bootstrap 4  
+ SheetJS excel parser library  
+ Animate.css library for animations  
+ jQuery  
+ SweetAlert2  
 
 
 ## Application Setup
  -Fork/clone this repository. Node is not setup on this application, so
  at this point I have been using my TextEditor's Live Server feature for development (I use Atom).
 
- -Remember to set URL's to localhost for all fetch requests to the backend API when working in development. Navigate to scripts folder and you will find the relevant urls to switch to localhost in the following files:
-   -login.js
-   -register.js
-   -retrieve-classes.js
-   -save-classes.js
+ -Remember to set URL's to localhost for all fetch requests to the backend API when working in development. Navigate to scripts folder and you will find the relevant urls to switch to localhost in the following files:  
+   login.js  
+   register.js  
+   retrieve-classes.js  
+   save-classes.js  
 
  -In order to play around with this application, an excel file is needed
  with student names and their scores/values in metric columns. While the excel file requirements are flexible for number ranking metrics, at this point there are a few requirements for formatting other types of data. There must be a "name" column that contains the student's first and last name. A "sex" column that must have values of either "m" for male or "f" for female. Binary metrics (meaning the student either HAS this attribute or does NOT HAVE this attribute must have values of either "yes" or "no"). Ranking metric columns (1-5, 1-10, etc) can be named anything you choose and ranked with any number value you choose. Below is an example excel file with proper
@@ -34,10 +34,11 @@ in this README as a reference.
 
  <img width="761" alt="sample excel" src="https://user-images.githubusercontent.com/28276414/59538156-a9287c80-8ead-11e9-869b-7b593027e763.png">
 
-SIDE NOTE:
+SIDE NOTE:  
+
 The application will give you free sample data to play with
 if you do not want to create your own excel file data. Simply click
-"Get Sample Data" button on the navigation bar.
+"Get Sample Data" button on the navigation bar.  
 
 
 -Go to https://github.com/iorme1/student-distribution-api and read setup
