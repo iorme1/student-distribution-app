@@ -1,12 +1,12 @@
 
-When your token expires, it doesnt give me the alert i wanted to show,
-it ends up in the catch err => and gives a json syntax error instead of
-the message mentioning your token may have expired, etc.
 
--------------
 
 BUGS
 ------
+-When your token expires, it doesnt give me the alert i wanted to show,
+it ends up in the catch err => and gives a json syntax error instead of
+the message mentioning your token may have expired, etc.
+
 -bug when clicking a bunch of times on a student (i think only happens
 on students that have been previously moved?)
 
@@ -18,12 +18,12 @@ data after adding an additional classroom.
 
 Features:
 ----------
--show parent participation or other "ranked" attribute numbers next to
-student went clicked on that particular "non-binary" stat
-
 -stat should be highlighted when clicked so user remembers what stat they had
 highlighted...if u click again on a highlightable state, remove the highlight.
     ...also think add aggregate highlights (male and special ed, etc.)
+
+-show parent participation or other "ranked" attribute numbers next to
+student went clicked on that particular "non-binary" stat
 
 -highlight boys blue and girls green or something like that, so we can
 get rid of the males/females attribute (MAYBE)

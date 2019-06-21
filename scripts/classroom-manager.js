@@ -223,20 +223,6 @@ function ClassroomsManager() {
     return students;
   }
 
-  function getLowestClassScore() {
-    let targetClass;
-    let currentSmallest = Infinity;
-    let classes = state.classrooms;
-
-    for (let room in classes) {
-      if (classes[room].score < currentSmallest) {
-        currentSmallest = classes[room].score;
-        targetClass = classes[room];
-      }
-    }
-    return targetClass;
-  }
-
   function setMaxCapacity(capacity) {
     state.maxCapacity = capacity;
   }

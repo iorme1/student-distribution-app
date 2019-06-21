@@ -29,7 +29,7 @@ in this README as a reference.
    retrieve-classes.js  
    save-classes.js  
 
- -In order to play around with this application, an excel file is needed
+ In order to play around with this application, an excel file is needed
  with student names and their scores/values in metric columns. While the excel file requirements are flexible for number ranking metrics, at this point there are a few requirements for formatting other types of data. There must be a "name" column that contains the student's first and last name. A "sex" column that must have values of either "m" for male or "f" for female. Binary metrics (meaning the student either HAS this attribute or does NOT HAVE this attribute must have values of either "yes" or "no"). Ranking metric columns (1-5, 1-10, etc) can be named anything you choose and ranked with any number value you choose. Below is an example excel file with proper
  formatting.
 
